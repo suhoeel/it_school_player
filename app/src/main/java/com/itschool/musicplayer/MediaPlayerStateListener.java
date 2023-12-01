@@ -1,4 +1,4 @@
-package com.martinmimigames.littlemusicplayer;
+package com.itschool.musicplayer;
 
 interface MediaPlayerStateListener {
 

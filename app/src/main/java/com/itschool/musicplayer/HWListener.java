@@ -1,4 +1,4 @@
-package com.martinmimigames.littlemusicplayer;
+package com.itschool.musicplayer;
 
 
 import static android.content.Intent.EXTRA_KEY_EVENT;
@@ -7,11 +7,8 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.media.AudioManager;
 import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
-import android.os.Build;
 import android.view.KeyEvent;
 
 /**
@@ -45,41 +42,30 @@ public class HWListener extends BroadcastReceiver implements MediaPlayerStateLis
    * Initializer, only useful when SDK_INT >= LOLLIPOP
    */
   void create() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      mediaSession = new MediaSession(service, HWListener.class.toString());
+    mediaSession = new MediaSession(service, HWListener.class.toString());
 
-      mediaSession.setCallback(new MediaSession.Callback() {
-        @Override
-        public boolean onMediaButtonEvent(Intent mediaButtonIntent) {
-          onReceive(service, mediaButtonIntent);
-          return super.onMediaButtonEvent(mediaButtonIntent);
-        }
-      });
-
-      playbackStateBuilder = new PlaybackState.Builder();
-      playbackStateBuilder.setActions(PlaybackState.ACTION_PLAY | PlaybackState.ACTION_PAUSE | PlaybackState.ACTION_PLAY_PAUSE);
-      mediaSession.setPlaybackState(playbackStateBuilder.build());
-
-      mediaSession.setActive(true);
-    } else {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
-        cn = new ComponentName(service, HWListener.class);
-        ((AudioManager) service.getSystemService(Context.AUDIO_SERVICE)).registerMediaButtonEventReceiver(cn);
+    mediaSession.setCallback(new MediaSession.Callback() {
+      @Override
+      public boolean onMediaButtonEvent(Intent mediaButtonIntent) {
+        onReceive(service, mediaButtonIntent);
+        return super.onMediaButtonEvent(mediaButtonIntent);
       }
-      service.registerReceiver(this, new IntentFilter(Intent.ACTION_MEDIA_BUTTON));
-    }
+    });
+
+    playbackStateBuilder = new PlaybackState.Builder();
+    playbackStateBuilder.setActions(PlaybackState.ACTION_PLAY | PlaybackState.ACTION_PAUSE | PlaybackState.ACTION_PLAY_PAUSE);
+    mediaSession.setPlaybackState(playbackStateBuilder.build());
+    mediaSession.setActive(true);
   }
 
   @Override
   public void setState(boolean playing, boolean looping) {
     // playback state only useful when SDK_INT >= LOLLIPOP
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      if (playing)
-        playbackStateBuilder.setState(PlaybackState.STATE_PLAYING, PlaybackState.PLAYBACK_POSITION_UNKNOWN, 1);
-      else
-        playbackStateBuilder.setState(PlaybackState.STATE_PAUSED, PlaybackState.PLAYBACK_POSITION_UNKNOWN, 1);
-      mediaSession.setPlaybackState(playbackStateBuilder.build());
-    }
+    if (playing)
+      playbackStateBuilder.setState(PlaybackState.STATE_PLAYING, PlaybackState.PLAYBACK_POSITION_UNKNOWN, 1);
+    else
+      playbackStateBuilder.setState(PlaybackState.STATE_PAUSED, PlaybackState.PLAYBACK_POSITION_UNKNOWN, 1);
+    mediaSession.setPlaybackState(playbackStateBuilder.build());
   }
 
   /**
@@ -87,15 +73,8 @@ public class HWListener extends BroadcastReceiver implements MediaPlayerStateLis
    */
   @Override
   public void onMediaPlayerReset() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      mediaSession.setActive(false);
-      mediaSession.release();
-    } else {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
-        ((AudioManager) service.getSystemService(Context.AUDIO_SERVICE)).unregisterMediaButtonEventReceiver(cn);
-      }
-      service.unregisterReceiver(this);
-    }
+    mediaSession.setActive(false);
+    mediaSession.release();
   }
 
   @Override

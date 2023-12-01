@@ -1,4 +1,4 @@
-package com.martinmimigames.littlemusicplayer;
+package com.itschool.musicplayer;
 
 import android.content.Context;
 import android.widget.Toast;

@@ -1,58 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:a="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.martinmimigames.littlemusicplayer"
-          a:versionCode="15"
-          a:versionName="2.13">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.itschool.musicplayer"
+    android:versionCode="15"
+    android:versionName="2.13">
 
-  <uses-permission a:name="android.permission.POST_NOTIFICATIONS"/>
-  <uses-permission a:name="android.permission.FOREGROUND_SERVICE"/>
-  <uses-permission a:name="android.permission.INTERNET"/>
-  <uses-permission a:name="android.permission.READ_EXTERNAL_STORAGE"/>
-  <uses-permission a:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
-  <uses-permission a:name="android.permission.READ_MEDIA_VIDEO"/>
-  <uses-permission a:name="android.permission.READ_MEDIA_AUDIO"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
+    <!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />-->
+    <!--  <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>-->
+    <!--  <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>-->
 
-  <application
-    a:icon="@drawable/ic_launcher"
-    a:label="Little Music Player"
-    a:resizeableActivity="true"
-    a:restoreAnyVersion="true"
-    a:theme="@style/app_theme"
-    a:usesCleartextTraffic="true"
-    tools:targetApi="n">
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="Music Player"
+        android:resizeableActivity="true"
+        android:restoreAnyVersion="true"
+        android:theme="@style/app_theme"
+        android:usesCleartextTraffic="true">
 
-    <receiver
-      a:name=".HWListener"
-      a:exported="true">
-      <intent-filter>
-        <action a:name="android.intent.action.MEDIA_BUTTON" />
-      </intent-filter>
-    </receiver>
+        <receiver
+            android:name="com.itschool.musicplayer.HWListener"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
 
-    <service
-      a:name=".Service"
-      a:exported="false"
-      a:foregroundServiceType="mediaPlayback"/>
+        <service
+            android:name="com.itschool.musicplayer.Service"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
 
-    <activity
-      a:name=".Launcher"
-      a:exported="true">
-      <intent-filter>
-        <action a:name="android.intent.action.MAIN" />
-        <category a:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-      <intent-filter tools:ignore="AppLinkUrlError">
-        <action a:name="android.intent.action.VIEW" />
-        <action a:name="android.intent.action.SEND" />
-        <action a:name="android.intent.action.SEND_MULTIPLE"/>
+        <activity
+            android:name="com.itschool.musicplayer.Launcher"
+            android:exported="true"
+            android:theme="@style/app_theme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
-        <category a:name="android.intent.category.DEFAULT" />
-
-        <data a:mimeType="audio/*" />
-        <data a:mimeType="video/*" />
-        <data a:mimeType="text/plain" />
-      </intent-filter>
-    </activity>
-  </application>
+        </activity>
+    </application>
 </manifest>

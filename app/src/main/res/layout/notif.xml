@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  a:layout_width="match_parent"
-  a:layout_height="match_parent"
-  a:orientation="vertical"
-  a:padding="7dp"
-  a:theme="@android:style/Theme">
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:padding="7dp"
+  android:theme="@android:style/Theme">
 
   <LinearLayout
-    a:layout_width="match_parent"
-    a:layout_height="20dp"
-    a:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="20dp"
+    android:orientation="horizontal">
 
     <ImageView
-      a:layout_width="20dp"
-      a:layout_height="match_parent"
-      a:src="@drawable/ic_launcher"
+      android:layout_width="20dp"
+      android:layout_height="match_parent"
+      android:src="@drawable/ic_launcher"
       tools:ignore="ContentDescription" />
 
     <TextView
-      a:id="@+id/notif_title"
-      a:layout_width="match_parent"
-      a:layout_height="match_parent"
-      a:ellipsize="end"
-      a:textAppearance="@android:style/TextAppearance.DeviceDefault"
-      a:textStyle="bold"
+      android:id="@+id/notif_title"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:ellipsize="end"
+      android:textAppearance="@android:style/TextAppearance.DeviceDefault"
+      android:textStyle="bold"
       tools:targetApi="ice_cream_sandwich"
-      a:singleLine="true" />
+      android:singleLine="true" />
 
   </LinearLayout>
 
   <TextView
-    a:layout_width="wrap_content"
-    a:layout_height="wrap_content"
-    a:text="Tap to close"
-    a:textAppearance="@android:style/TextAppearance.DeviceDefault"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Tap to close"
+    android:textAppearance="@android:style/TextAppearance.DeviceDefault"
     tools:ignore="HardcodedText"
     tools:targetApi="ice_cream_sandwich" />
 
